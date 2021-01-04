@@ -1,0 +1,157 @@
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    min-width: 640px;
+    min-height: 100vh;
+    margin: 0;
+    font-family: "Verdana", "Tahoma", sans-serif;
+    font-size: 14px;
+    line-height: 18px;
+    color: #333333;
+    background-color: white;
+}
+
+li {
+    list-style: none;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+ul {
+    padding: 20px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.code-container {
+    background: #f5f8fa;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.command {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.command .command-code {
+    background: #f5f8fa;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+
+.page-header {
+    color: #dedede;
+    background-color: #0f0f0f;
+}
+
+.page-header .container {
+    display: flex;
+    justify-content: space-between;
+}
+
+th {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.app-header {
+    border-bottom: 1px solid gray;
+    text-align: right;
+}
+
+.row {
+    display: flex;
+}
+
+.column-left {
+    flex: 15%;
+    border-right: 1px solid gray;
+    min-height: 85vh;
+
+}
+
+.column-right {
+    flex: 100%;
+    padding: 20px;
+    height: 300px;
+}
+
+.page-header a {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.page-title {
+    margin: 0;
+    margin-bottom: 4px;
+    padding: 0;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 48px;
+}
+
+.sign-in-title {
+    margin: 0;
+    margin-bottom: 4px;
+    padding: 0;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 48px;
+}
+
+.page-footer {
+    margin-top: auto;
+    color: #ffffff;
+    background-color: #333333;
+}
+
+.page-footer .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    padding-bottom: 14px;
+}
+
+.page-footer p {
+    color: #888888;
+    margin: 0;
+    padding: 0;
+}
+
+.icon {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-size: cover;
+}
+
+.icon-logout {
+    background-image: url(/img/logout_gray_136_136_136.svg);
+}
+
+.icon-logout:hover,
+.icon-logout:focus {
+    background-image: url(/img/logout_red_233_86_86.svg);
+}
+
+.buttons {
+    display: flex;
+    visibility: hidden;
+    align-items: center;
+    justify-content: space-between;
+}
