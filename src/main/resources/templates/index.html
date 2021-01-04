@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Commands repository - online notes with commands & hotkeys</title>
+</head>
+<body class="page">
+<header class="page-header">
+    <div class="container">
+        <h1 class="page-title">Commands repository</h1>
+        <table>
+            <tr>
+                <th>
+                    <img src="img/login_gray_136_136_136.svg" width="22px">
+                </th>
+                <th><h2 class="sign-in-title">Signed in as <b>barinov3d@gmail.com</b></h2></th>
+                <th><span class="icon icon-logout"></span></th>
+            </tr>
+        </table>
+    </div>
+</header>
+<main>
+    <div class="app-header">
+        <div class="container">
+            <h1 class="page-title">Docker</h1>
+        </div>
+    </div>
+    <section>
+        <div class="row">
+            <div class="column-left">
+                <ul>
+                    <a href="#">
+                        <li>IntelliJ IDEA</li>
+                    </a>
+                    <a href="#">
+                        <li><b>Docker</b>
+                        <li>
+                    </a>
+                    <a href="#">
+                        <li>Windows</li>
+                    </a>
+                    <a href="#">
+                        <li>CentOS</li>
+                    </a>
+                    <a href="#">
+                        <li>MongoDB</li>
+                    </a>
+                    <a href="#">
+                        <li>Git</li>
+                    </a>
+                </ul>
+            </div>
+            <div class="column-right">
+                <div class="command">
+                <button href="#" style="background-color: lightgreen; font-weight: bold">add new command</button>
+                </div>
+                <div class="command" onmouseover="showStuff('.buttons',this)" onmouseout="hideStuff('.buttons',this)">
+                    <div class="buttons">
+                        <button href="#" style="background-color: lightgreen; font-weight: bold">copy to clipboard</button>
+                        <table>
+                            <tr>
+                                <th>
+                                    <button href="#">duplicate</button>
+                                </th>
+                                <th>
+                                    <button href="#">edit</button>
+                                </th>
+                                <th>
+                                    <button href="#" style="background-color: lightcoral; font-weight: bold">x</button>
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <p>If you do not specify -a then Docker will attach to both stdout and stderr . You can specify to
+                        which
+                        of the three standard streams (STDIN, STDOUT, STDERR) you’d like to connect instead, as in:</p>
+                    <div class="command-code">
+                        <code>$ docker run -a stdin -a stdout -i -t ubuntu /bin/bash</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer class="page-footer">
+    <div class="container">
+        <p>Dmitry Barinov</p>
+        <p>2021</p>
+    </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
