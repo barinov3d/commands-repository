@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -26,6 +28,13 @@ public class IndexController {
         model.addAttribute("applications", applications);
         model.addAttribute("commands", commands);
         return "index";
+    }
+
+    @PostMapping("/application")
+    public String addApplication(@ModelAttribute(value = "application") Application application) {
+        application.setName(application.getName());
+        applicationService.save(application);
+        return "redirect:/" + application.getId();
     }
 
 }
