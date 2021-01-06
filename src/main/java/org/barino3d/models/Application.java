@@ -21,7 +21,7 @@ public class Application {
     @DBRef
     private List<Command> commands = new ArrayList<>();
 
-    public Application(String name, List<Command> commands) {
+    public Application(String name) {
         this.name = name;
         this.commands = commands;
     }

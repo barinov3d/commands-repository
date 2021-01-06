@@ -7,11 +7,13 @@
     margin: 0 auto;
 }
 
+.btn1, .btn2 {
+    display: none;
+}
+
 .page {
     display: flex;
     flex-direction: column;
-    min-width: 640px;
-    min-height: 100vh;
     margin: 0;
     font-family: "Verdana", "Tahoma", sans-serif;
     font-size: 14px;
@@ -80,14 +82,11 @@ th {
 .column-left {
     flex: 15%;
     border-right: 1px solid gray;
-    min-height: 85vh;
-
 }
 
 .column-right {
     flex: 100%;
     padding: 20px;
-    height: 300px;
 }
 
 .page-header a {
@@ -114,7 +113,7 @@ th {
 }
 
 .page-footer {
-    margin-top: auto;
+    /*margin-top: auto;*/
     color: #ffffff;
     background-color: #333333;
 }
@@ -150,8 +149,9 @@ th {
 }
 
 .buttons {
-    display: flex;
-    visibility: hidden;
+    display: none;
+    /*visibility: hidden;*/
     align-items: center;
     justify-content: space-between;
 }
+

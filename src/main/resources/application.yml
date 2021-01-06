@@ -1,0 +1,5 @@
+mongock:
+  #runner-type: "ApplicationRunner" # default
+  runner-type: "InitializingBean"
+  change-logs-scan-package:
+    - org.barino3d.mongock.changelog
