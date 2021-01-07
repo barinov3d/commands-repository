@@ -1,6 +1,8 @@
 package org.barino3d.models;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,6 +13,8 @@ import java.util.List;
 
 @Data
 @Document(collection = "applications")
+@ToString(exclude = "commands")
+@NoArgsConstructor
 public class Application {
 
     @Id
@@ -22,6 +26,10 @@ public class Application {
     private List<Command> commands = new ArrayList<>();
 
     public Application(String name) {
+        this.name = name;
+    }
+
+    public Application(String name, List<Command> commands) {
         this.name = name;
         this.commands = commands;
     }

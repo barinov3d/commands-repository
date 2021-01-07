@@ -5,8 +5,8 @@ function showStuff(btn) {
     btn.querySelector('.btn2').style.display = "flex";
     let command = btn.querySelector('.command-code');
     let bgColor = command.style.background;
-    command.style.background = "#e7e7e7";
+/*    command.style.background = "#e7e7e7";
         setTimeout(function(){
             command.style.background = bgColor;
-        }, 1000);
+        }, 1000);*/
 }

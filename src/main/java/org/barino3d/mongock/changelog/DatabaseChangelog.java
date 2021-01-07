@@ -8,6 +8,10 @@ import org.barino3d.models.Command;
 import org.barino3d.repositories.ApplicationRepository;
 import org.barino3d.repositories.CommandRepository;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 @ChangeLog
 public class DatabaseChangelog {
 
@@ -65,5 +69,20 @@ public class DatabaseChangelog {
         commandRepository.save(command7);
         commandRepository.save(command8);
 
+
+        List<Command> list1 =  new ArrayList<>();
+        list1.add(command1);
+        list1.add(command7);
+        List<Command> list2 =  new ArrayList<>();
+        list2.add(command2);
+        list2.add(command3);
+        list2.add(command4);
+        list2.add(command5);
+        application1.addCommands(list1);
+        application2.addCommands(list2);
+        application6.addCommand(command8);
+        applicationRepository.save(application1);
+        applicationRepository.save(application2);
+        applicationRepository.save(application6);
     }
 }
