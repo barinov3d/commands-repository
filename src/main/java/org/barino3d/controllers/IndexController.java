@@ -19,23 +19,15 @@ public class IndexController {
     private final ApplicationService applicationService;
     private final CommandRepository commandRepository;
 
-/*    @GetMapping("/")
-    public String index(Model model) {
-        List<Application> applications = applicationService.findAll();
-        List<Command> commands = applications.get(0).getCommands();
-        model.addAttribute("applications", applications);
-        if(model.getAttribute("commands") == null) {
-            model.addAttribute("commands", commands);
-        }
-        model.addAttribute("newApp", new Application());
-        model.addAttribute("newCommand", new Command());
-        return "index";
-    }*/
-
     @GetMapping("/")
     public String index(Model model) {
         List<Application> applications = applicationService.findAll();
-        final Application application = applications.get(0);
+        Application application = null;
+        if (applications.size() > 0) {
+            application = applications.get(0);
+        } else {
+            application = applicationService.save(new Application("Test application"));
+        }
         List<Command> commands = application.getCommands();
         model.addAttribute("commands", commands);
         return "redirect:/" + application.getId();
