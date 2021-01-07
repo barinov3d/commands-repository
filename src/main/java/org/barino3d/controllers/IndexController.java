@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -21,19 +19,25 @@ public class IndexController {
     private final ApplicationService applicationService;
     private final CommandRepository commandRepository;
 
-    @GetMapping("/")
-    public String newAuthorPage(Model model) {
+/*    @GetMapping("/")
+    public String index(Model model) {
         List<Application> applications = applicationService.findAll();
-        List<Command> commands = commandRepository.findAll();
+        List<Command> commands = applications.get(0).getCommands();
         model.addAttribute("applications", applications);
-        model.addAttribute("commands", commands);
+        if(model.getAttribute("commands") == null) {
+            model.addAttribute("commands", commands);
+        }
+        model.addAttribute("newApp", new Application());
+        model.addAttribute("newCommand", new Command());
         return "index";
-    }
+    }*/
 
-    @PostMapping("/application")
-    public String addApplication(@ModelAttribute(value = "application") Application application) {
-        application.setName(application.getName());
-        applicationService.save(application);
+    @GetMapping("/")
+    public String index(Model model) {
+        List<Application> applications = applicationService.findAll();
+        final Application application = applications.get(0);
+        List<Command> commands = application.getCommands();
+        model.addAttribute("commands", commands);
         return "redirect:/" + application.getId();
     }
 
