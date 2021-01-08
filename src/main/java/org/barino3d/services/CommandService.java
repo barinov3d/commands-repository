@@ -1,7 +1,6 @@
 package org.barino3d.services;
 
 import org.barino3d.exceptions.CommandNotFoundException;
-import org.barino3d.models.Application;
 import org.barino3d.models.Command;
 
 import java.util.List;

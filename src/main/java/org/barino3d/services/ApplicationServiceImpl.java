@@ -3,6 +3,7 @@ package org.barino3d.services;
 import org.barino3d.exceptions.ApplicationNotFoundException;
 import org.barino3d.exceptions.DuplicateApplicationNameException;
 import org.barino3d.models.Application;
+import org.barino3d.models.User;
 import org.barino3d.repositories.ApplicationRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,11 @@ public class ApplicationServiceImpl implements ApplicationService {
     @Override
     public List<Application> findAll() {
         return applicationRepository.findAll();
+    }
+
+    @Override
+    public List<Application> findAllByUser(User user) {
+        return applicationRepository.findAllByUser(user);
     }
 
     @Override

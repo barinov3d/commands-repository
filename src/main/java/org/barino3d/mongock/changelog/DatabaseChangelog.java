@@ -5,8 +5,10 @@ import com.github.cloudyrock.mongock.ChangeSet;
 import com.mongodb.client.MongoDatabase;
 import org.barino3d.models.Application;
 import org.barino3d.models.Command;
+import org.barino3d.models.User;
 import org.barino3d.repositories.ApplicationRepository;
 import org.barino3d.repositories.CommandRepository;
+import org.barino3d.repositories.UserRepository;
 
 import java.util.Arrays;
 
@@ -19,7 +21,9 @@ public class DatabaseChangelog {
     }
 
     @ChangeSet(order = "002", id = "insertData", author = "dmitry")
-    public void insertData(ApplicationRepository applicationRepository, CommandRepository commandRepository) {
+    public void insertData(ApplicationRepository applicationRepository, CommandRepository commandRepository, UserRepository userRepository) {
+        User user1 = new User("test1@gmail.com");
+        User user2 = new User("test2@gmail.com");
 
         final Application application1 = new Application("IntelliJ IDEA");
         final Application application2 = new Application("Docker");
@@ -32,6 +36,16 @@ public class DatabaseChangelog {
 
         applicationRepository.save(application3);
         applicationRepository.save(application4);
+
+
+        user1.addApplication(application1);
+        user1.addApplication(application2);
+
+        user2.addApplication(application3);
+        user2.addApplication(application4);
+
+        userRepository.save(user1);
+        userRepository.save(user2);
 
         final Command command1 = new Command("Double 'SHIFT' button press", "searching Everywhere", application1);
         final Command command2 = new Command("'Ctrl' + mouse click", "go to declaration", application1);
@@ -54,9 +68,13 @@ public class DatabaseChangelog {
         commandRepository.save(command8);
 
         application1.addCommands(Arrays.asList(command1, command2));
+        application1.setUser(user1);
         application2.addCommands(Arrays.asList(command3, command4));
+        application2.setUser(user1);
         application3.addCommands(Arrays.asList(command5, command6));
+        application3.setUser(user2);
         application4.addCommands(Arrays.asList(command7, command8));
+        application4.setUser(user2);
 
         applicationRepository.save(application1);
         applicationRepository.save(application2);

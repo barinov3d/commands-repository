@@ -3,7 +3,7 @@
 }
 
 #page-container {
-    padding-bottom: 2.5rem;    /* Footer height */
+    padding-bottom: 2.5rem; /* Footer height */
 }
 
 .container {
@@ -141,6 +141,7 @@ th {
     padding-left: 30px;
     padding-right: 30px;
 }
+
 .icon {
     display: inline-block;
     width: 22px;

@@ -24,13 +24,13 @@
     </header>
     <main>
         <div class="app-header">
-            <div class="container" align="right">
+            <div align="right" class="container">
                 <table>
                     <tr>
-                        <th><h1 id="button" class="page-title" th:object="${currentApplication}"
+                        <th><h1 class="page-title" id="button" th:object="${currentApplication}"
                                 th:text="${currentApplication.name}">App name</h1></th>
                         <th>
-                            <form method="POST" th:action="@{/{id}/delete(id=${currentApplication.id})}">
+                            <form method="POST" th:action="@{{id}/delete(id=${currentApplication.id})}">
                                 <button style="background-color: lightcoral; font-weight: bold"
                                         title="delete application and all it's commands">x
                                 </button>
@@ -45,22 +45,22 @@
             <div class="row">
                 <div class="column-left">
                     <ul th:each="app : ${applications}">
-                        <a href="#" th:href="@{/{id}(id=${app.id})}" th:text="${app.name}">
+                        <a href="#" th:href="@{{id}(id=${app.id})}" th:text="${app.name}">
                             <li>Application name</li>
                         </a>
                     </ul>
                     <ul>
                         <li>
-                            <form method="POST" th:action="@{/application}">
+                            <form method="POST" th:action="@{/{userId}/application(userId=${user.id})}">
                                 <table>
                                     <tr>
                                         <th><label>
                                             <input placeholder="enter new app name.." th:field="*{newApp.name}"/>
                                         </label></th>
                                         <th>
-                                            <button type="submit" href="#"
-                                                    style="background-color: lightgreen; font-weight: bold"
-                                                    title="add new application">+
+                                            <button href="#" style="background-color: lightgreen; font-weight: bold"
+                                                    title="add new application"
+                                                    type="submit">+
                                             </button>
                                         </th>
                                     </tr>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="column-right">
                     <div class="command">
-                        <form method="POST" th:action="@{/{appId}/command(appId=${currentApplication.id})}">
+                        <form method="POST" th:action="@{{appId}/command(appId=${currentApplication.id})}">
                             <input placeholder="enter command description.." th:field="*{newCommand.description}">
                             <input placeholder="enter command text.." th:field="*{newCommand.text}">
                             <button style="background-color: lightgreen; font-weight: bold"
@@ -81,17 +81,17 @@
                             </button>
                         </form>
                     </div>
-                    <div th:each="command : ${commands}" class="command">
-                        <p th:text="${command.description}" style="font-size: 12px">command description</p>
+                    <div class="command" th:each="command : ${commands}">
+                        <p style="font-size: 12px" th:text="${command.description}">command description</p>
                         <div class="buttons">
-                            <button onclick="copyToClipboard(this.closest('.command'))" href="#"
+                            <button href="#" onclick="copyToClipboard(this.closest('.command'))"
                                     style="background-color: lightgreen; font-weight: bold">copy to clipboard
                             </button>
                             <table>
                                 <tr>
                                     <th>
                                         <form method="POST"
-                                              th:action="@{/{appId}/command/{cmdId}/delete(appId=${currentApplication.id}, cmdId=${command.id})}">
+                                              th:action="@{{appId}/command/{cmdId}/delete(appId=${currentApplication.id}, cmdId=${command.id})}">
                                             <button href="#" style="background-color: lightcoral; font-weight: bold">
                                                 delete
                                             </button>
@@ -102,7 +102,7 @@
                         </div>
                         <a type="button">
                             <div class="command-code">
-                                <code th:text="${command.text}" style="font-family:monospace;">command text</code>
+                                <code style="font-family:monospace;" th:text="${command.text}">command text</code>
                             </div>
                         </a>
                     </div>
