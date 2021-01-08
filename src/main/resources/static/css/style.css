@@ -1,18 +1,10 @@
-* {
-    box-sizing: border-box;
-}
-
 #page-container {
-    padding-bottom: 2.5rem; /* Footer height */
+    padding-bottom: 2.5rem;
 }
 
 .container {
     width: 90%;
     margin: 0 auto;
-}
-
-.btn1, .btn2 {
-    display: none;
 }
 
 .page {
@@ -21,16 +13,65 @@
     margin: 0;
     font-family: "Verdana", "Tahoma", sans-serif;
     font-size: 14px;
-    line-height: 18px;
-    color: #333333;
-    background-color: white;
     min-height: 100vh;
     position: relative;
 }
 
+
+button {
+    box-shadow:inset 0px 1px 0px 0px #ffffff;
+    background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+    background-color:#ffffff;
+    border-radius:6px;
+    border:1px solid #dcdcdc;
+    display:inline-block;
+    cursor:pointer;
+    color:#666666;
+    font-weight:bold;
+    padding:4px 8px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #ffffff;
+}
+button:hover {
+    background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+    background-color:#f6f6f6;
+
+}
+button:active {
+    position:relative;
+    top:1px;
+}
+
+button.green{
+    box-shadow:inset 0px 1px 0px 0px #a4e271;
+    background:linear-gradient(to bottom, #89c403 5%, #77a809 100%);
+    background-color:#89c403;
+    border:1px solid #74b807;
+    color:#ffffff;
+    text-shadow:0px 1px 0px #528009;
+}
+
+button.green:hover{
+    background:linear-gradient(to bottom, #77a809 5%, #89c403 100%);
+    background-color:#77a809;
+}
+
+button.red{
+    box-shadow:inset 0px 1px 0px 0px #f5978e;
+    background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+    background-color:#f24537;
+    border:1px solid #d02718;
+    color:#ffffff;
+    text-shadow:0px 1px 0px #810e05;
+}
+button.red:hover{
+    background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+    background-color:#c62d1f;
+}
+
+
 li {
     list-style: none;
-    /*margin-bottom: 10px;*/
     font-size: 12px;
 }
 
@@ -43,11 +84,6 @@ a {
     background: #f5f8fa;
     padding: 20px;
     margin-bottom: 10px;
-}
-
-.command {
-    padding-left: 10px;
-    padding-right: 10px;
 }
 
 .command .command-code {
@@ -68,16 +104,8 @@ a {
     justify-content: space-between;
 }
 
-th {
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
 .app-header {
-    display: flex;
-    justify-content: right;
     border-bottom: 1px solid gray;
-    text-align: right;
 }
 
 .row {
@@ -96,11 +124,6 @@ th {
     flex: 100%;
     padding: 20px;
     min-height: 100vh;
-}
-
-.page-header a {
-    font-size: 16px;
-    line-height: 24px;
 }
 
 .page-title {
@@ -159,7 +182,6 @@ th {
 }
 
 .buttons {
-    align-items: center;
+    display: flex;
     justify-content: space-between;
 }
-
