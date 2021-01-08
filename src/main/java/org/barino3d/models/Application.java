@@ -24,6 +24,8 @@ public class Application {
     @Field(name = "commands")
     @DBRef
     private List<Command> commands = new ArrayList<>();
+    @DBRef
+    private User user;
 
     public Application(String name) {
         this.name = name;
@@ -34,8 +36,8 @@ public class Application {
         this.commands = commands;
     }
 
-    public void addCommand(Command book) {
-        commands.add(book);
+    public void addCommand(Command command) {
+        commands.add(command);
     }
 
     public void addCommands(List<Command> commandsToAdd) {

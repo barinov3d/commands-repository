@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.barino3d.models.Application;
 import org.barino3d.models.Command;
 import org.barino3d.services.ApplicationService;
+import org.barino3d.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,16 +20,18 @@ import java.util.List;
 public class ApplicationController {
 
     private final ApplicationService applicationService;
+    private final UserService userService;
 
-    @PostMapping("/application")
-    public String addApplication(@ModelAttribute(value = "newApp") Application app) {
+    @PostMapping("{userId}/application")
+    public String addApplication(@PathVariable String userId, @ModelAttribute(value = "newApp") Application app) {
+        app.setUser(userService.findById(userId));
         applicationService.save(app);
-        return "redirect:/" + app.getId();
+        return "redirect:/" + userId + "/" + app.getId();
     }
 
-    @GetMapping("/{id}")
-    public String getApplication(@PathVariable String id, Model model) {
-        List<Application> applications = applicationService.findAll();
+    @GetMapping("{userId}/application/{id}")
+    public String getApplication(@PathVariable String userId, @PathVariable String id, Model model) {
+        List<Application> applications = applicationService.findAllByUser(userService.findById(userId));
         final Application currentApplication = applicationService.findById(id);
         List<Command> commands = currentApplication.getCommands();
         model.addAttribute("currentApplication", currentApplication);
@@ -39,10 +42,10 @@ public class ApplicationController {
         return "index";
     }
 
-    @PostMapping("{id}/delete")
-    public String deleteCommand(@PathVariable String id) {
+    @PostMapping("{userId}/{id}/delete")
+    public String deleteCommand(@PathVariable String userId, @PathVariable String id) {
         applicationService.delete(applicationService.findById(id));
-        return "redirect:/" + applicationService.findAll().get(0).getId();
+        return "redirect:/" + userId + "/" + applicationService.findAllByUser(userService.findById(userId)).get(0).getId();
     }
 
 
