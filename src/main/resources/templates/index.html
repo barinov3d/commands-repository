@@ -18,7 +18,9 @@
                     </th>
                     <th><h2 class="sign-in-title">Signed in as <b th:text="${user.email}">email</b></h2></th>
                     <th>
-                        <span type="button" class="icon icon-logout"></span>
+                        <a th:href="@{/logout}" type="submit">
+                            <span type="button" class="icon icon-logout"></span>
+                        </a>
                     </th>
                 </tr>
             </table>
