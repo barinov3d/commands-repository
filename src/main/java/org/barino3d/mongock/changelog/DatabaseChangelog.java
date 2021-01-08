@@ -8,9 +8,7 @@ import org.barino3d.models.Command;
 import org.barino3d.repositories.ApplicationRepository;
 import org.barino3d.repositories.CommandRepository;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Arrays;
 
 @ChangeLog
 public class DatabaseChangelog {
@@ -25,40 +23,26 @@ public class DatabaseChangelog {
 
         final Application application1 = new Application("IntelliJ IDEA");
         final Application application2 = new Application("Docker");
-        final Application application3 = new Application("Windows");
-        final Application application4 = new Application("CentOS");
-        final Application application5 = new Application("MongoDB");
-        final Application application6 = new Application("Git");
+
+        final Application application3 = new Application("MongoDB");
+        final Application application4 = new Application("Git");
 
         applicationRepository.save(application1);
         applicationRepository.save(application2);
+
         applicationRepository.save(application3);
         applicationRepository.save(application4);
-        applicationRepository.save(application5);
-        applicationRepository.save(application6);
 
         final Command command1 = new Command("Double 'SHIFT' button press", "searching Everywhere", application1);
-        final Command command2 = new Command("docker run mongo", "run docker container from image named 'mongo'", application2);
-        final Command command3 = new Command("docker ps", "list containers", application2);
-        final Command command4 = new Command("docker images", "list images", application2);
-        final Command command5 = new Command("docker help", "list available commands", application2);
-        final Command command6 = new Command( "version: \"3.9\"  # optional since v1.27.0\n" +
-                "services:\n" +
-                "  web:\n" +
-                "    build: .\n" +
-                "    ports:\n" +
-                "      - \"5000:5000\"\n" +
-                "    volumes:\n" +
-                "      - .:/code\n" +
-                "      - logvolume01:/var/log\n" +
-                "    links:\n" +
-                "      - redis\n" +
-                "  redis:\n" +
-                "    image: redis\n" +
-                "volumes:\n" +
-                "  logvolume01: {}","docker compose example", application2);
-        final Command command7 = new Command("'Ctrl' + 'Shift' + 'F8'", "searching Everywhere", application1);
-        final Command command8 = new Command("test", "test", application6);
+        final Command command2 = new Command("'Ctrl' + mouse click", "go to declaration", application1);
+        final Command command3 = new Command("docker run mongo", "run docker container from image named 'mongo'", application2);
+        final Command command4 = new Command("docker ps", "show running containers", application2);
+
+        final Command command5 = new Command("use DATABASE_NAME", "use exact database", application3);
+        final Command command6 = new Command("show dbs", "listing all the databases", application3);
+
+        final Command command7 = new Command("git status", "show current branch status", application4);
+        final Command command8 = new Command("git pull", "pull from remote branch", application4);
 
         commandRepository.save(command1);
         commandRepository.save(command2);
@@ -69,20 +53,14 @@ public class DatabaseChangelog {
         commandRepository.save(command7);
         commandRepository.save(command8);
 
+        application1.addCommands(Arrays.asList(command1, command2));
+        application2.addCommands(Arrays.asList(command3, command4));
+        application3.addCommands(Arrays.asList(command5, command6));
+        application4.addCommands(Arrays.asList(command7, command8));
 
-        List<Command> list1 =  new ArrayList<>();
-        list1.add(command1);
-        list1.add(command7);
-        List<Command> list2 =  new ArrayList<>();
-        list2.add(command2);
-        list2.add(command3);
-        list2.add(command4);
-        list2.add(command5);
-        application1.addCommands(list1);
-        application2.addCommands(list2);
-        application6.addCommand(command8);
         applicationRepository.save(application1);
         applicationRepository.save(application2);
-        applicationRepository.save(application6);
+        applicationRepository.save(application3);
+        applicationRepository.save(application4);
     }
 }
