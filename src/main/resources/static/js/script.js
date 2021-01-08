@@ -1,6 +1,8 @@
-function showButtons(codeText) {
-    document.querySelectorAll('.buttons').forEach(e => e.style.display = "none");
-    let closestCommand = codeText.closest('.command');
-    let buttons = closestCommand.querySelector('.buttons');
-    buttons.style.display = "flex";
+function copyToClipboard(parentElement) {
+    let element = parentElement.querySelector('.command-code');
+    let $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).text().trim()).select();
+    document.execCommand("copy");
+    $temp.remove();
 }

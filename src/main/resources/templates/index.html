@@ -73,7 +73,7 @@
                 </div>
                 <div class="column-right">
                     <div class="command">
-                        <form method="POST" th:action="@{/{id}/command(id=${currentApplication.id})}">
+                        <form method="POST" th:action="@{/{appId}/command(appId=${currentApplication.id})}">
                             <input placeholder="enter command description.." th:field="*{newCommand.description}">
                             <input placeholder="enter command text.." th:field="*{newCommand.text}">
                             <button style="background-color: lightgreen; font-weight: bold"
@@ -82,14 +82,7 @@
                         </form>
                     </div>
                     <div th:each="command : ${commands}" class="command">
-                        <p th:text="${command.description}" style="font-size: 12px">If you do not specify
-                            -a
-                            then Docker
-                            will attach to both stdout
-                            and stderr . You can specify to
-                            which
-                            of the three standard streams (STDIN, STDOUT, STDERR) you’d like to connect instead, as
-                            in:</p>
+                        <p th:text="${command.description}" style="font-size: 12px">command description</p>
                         <div class="buttons">
                             <button onclick="copyToClipboard(this.closest('.command'))" href="#"
                                     style="background-color: lightgreen; font-weight: bold">copy to clipboard
@@ -97,7 +90,8 @@
                             <table>
                                 <tr>
                                     <th>
-                                        <form method="POST" th:action="@{/command/{id}/delete(id=${command.id})}">
+                                        <form method="POST"
+                                              th:action="@{/{appId}/command/{cmdId}/delete(appId=${currentApplication.id}, cmdId=${command.id})}">
                                             <button href="#" style="background-color: lightcoral; font-weight: bold">
                                                 delete
                                             </button>
@@ -106,10 +100,9 @@
                                 </tr>
                             </table>
                         </div>
-                        <a type="button" onclick="showButtons(this)">
+                        <a type="button">
                             <div class="command-code">
-                                <code th:text="${command.text}" style="font-family:monospace;">$ docker run -a stdin -a
-                                    stdout -i -t ubuntu /bin/bash</code>
+                                <code th:text="${command.text}" style="font-family:monospace;">command text</code>
                             </div>
                         </a>
                     </div>
@@ -124,15 +117,5 @@
 </footer>
 <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
 <script src="/js/script.js" type="text/javascript"></script>
-<script>
-    function copyToClipboard(parentElement) {
-        let element = parentElement.querySelector('.command-code');
-        let $temp = $("<input>");
-        $("body").append($temp);
-        $temp.val($(element).text().trim()).select();
-        document.execCommand("copy");
-        $temp.remove();
-    }
-</script>
 </body>
 </html>
