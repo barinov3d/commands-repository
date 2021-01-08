@@ -16,8 +16,10 @@
                     <th>
                         <img alt="login img" src="/img/login_gray_136_136_136.svg" width="22px">
                     </th>
-                    <th><h2 class="sign-in-title">Signed in as <b>barinov3d@gmail.com</b></h2></th>
-                    <th><span class="icon icon-logout"></span></th>
+                    <th><h2 class="sign-in-title">Signed in as <b th:text="${user.email}">email</b></h2></th>
+                    <th>
+                        <span type="button" class="icon icon-logout"></span>
+                    </th>
                 </tr>
             </table>
         </div>

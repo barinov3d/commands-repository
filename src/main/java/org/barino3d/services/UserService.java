@@ -2,10 +2,11 @@ package org.barino3d.services;
 
 import org.barino3d.exceptions.UserNotFoundException;
 import org.barino3d.models.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
     List<User> findAll();
 
@@ -18,5 +19,7 @@ public interface UserService {
     User save(User user);
 
     User findByEmail(String email);
+
+    User createUser(User userDetails);
 
 }

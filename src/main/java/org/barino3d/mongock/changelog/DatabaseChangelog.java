@@ -9,6 +9,7 @@ import org.barino3d.models.User;
 import org.barino3d.repositories.ApplicationRepository;
 import org.barino3d.repositories.CommandRepository;
 import org.barino3d.repositories.UserRepository;
+import org.barino3d.services.UserService;
 
 import java.util.Arrays;
 
@@ -21,10 +22,9 @@ public class DatabaseChangelog {
     }
 
     @ChangeSet(order = "002", id = "insertData", author = "dmitry")
-    public void insertData(ApplicationRepository applicationRepository, CommandRepository commandRepository, UserRepository userRepository) {
-        User user1 = new User("test1@gmail.com");
-        User user2 = new User("test2@gmail.com");
-
+    public void insertData(ApplicationRepository applicationRepository, CommandRepository commandRepository, UserService userService) {
+        User user1 = userService.createUser(new User("test1@gmail.com", "123456"));
+        User user2 = userService.createUser(new User("test2@gmail.com", "123456"));
         final Application application1 = new Application("IntelliJ IDEA");
         final Application application2 = new Application("Docker");
 
@@ -44,8 +44,8 @@ public class DatabaseChangelog {
         user2.addApplication(application3);
         user2.addApplication(application4);
 
-        userRepository.save(user1);
-        userRepository.save(user2);
+        userService.save(user1);
+        userService.save(user2);
 
         final Command command1 = new Command("Double 'SHIFT' button press", "searching Everywhere", application1);
         final Command command2 = new Command("'Ctrl' + mouse click", "go to declaration", application1);
