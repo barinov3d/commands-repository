@@ -23,14 +23,14 @@ public class ApplicationController {
     private final ApplicationService applicationService;
     private final UserService userService;
 
-    @PostMapping("{userId}/application")
+    @PostMapping("user/{userId}/application")
     public String addApplication(@PathVariable String userId, @ModelAttribute(value = "newApp") Application application) {
         application.setUser(userService.findById(userId));
         applicationService.save(application);
-        return "redirect:/" + userId + "/application/" + application.getId();
+        return "redirect:/user/" + userId + "/application/" + application.getId();
     }
 
-    @GetMapping("{userId}/application/{id}")
+    @GetMapping("user/{userId}/application/{id}")
     public String getApplication(@PathVariable String userId, @PathVariable String id, Model model) {
         User user = userService.findById(userId);
         List<Application> applications = applicationService.findAllByUser(user);
@@ -45,13 +45,13 @@ public class ApplicationController {
         return "index";
     }
 
-    @PostMapping("{userId}/application/{id}/delete")
+    @PostMapping("user/{userId}/application/{id}/delete")
     public String deleteCommand(@PathVariable String userId, @PathVariable String id) {
         if (applicationService.findAllByUser(userService.findById(userId)).size() == 1) {
             return "redirect:/";
         }
         applicationService.delete(applicationService.findById(id));
-        return "redirect:/" + userId + "/application/" + applicationService.findAllByUser(userService.findById(userId)).get(0).getId();
+        return "redirect:/user/" + userId + "/application/" + applicationService.findAllByUser(userService.findById(userId)).get(0).getId();
     }
 
 

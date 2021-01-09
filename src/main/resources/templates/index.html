@@ -50,7 +50,7 @@
                     <ul>
                         <li>
                             <form class="row" method="POST"
-                                  th:action="@{/{userId}/application(userId=${user.id})}">
+                                  th:action="@{/user/{userId}/application(userId=${user.id})}">
                                 <input placeholder="enter new app name.." th:field="*{newApp.name}"/>
                                 <button class="green" href="#"
                                         style="font-weight: bold"

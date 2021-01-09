@@ -18,7 +18,7 @@ public class CommandController {
     private final ApplicationService applicationService;
     private final CommandService commandService;
 
-    @PostMapping("{userId}/application/{appId}/command")
+    @PostMapping("user/{userId}/application/{appId}/command")
     public String addCommand(@PathVariable String userId, @PathVariable String appId, @ModelAttribute(value = "newCommand") Command command) {
         Command newCommand = new Command();
         newCommand.setDescription(command.getDescription());
@@ -26,13 +26,13 @@ public class CommandController {
         final Application application = applicationService.findById(appId);
         application.getCommands().add(commandService.save(newCommand));
         applicationService.save(application);
-        return "redirect:/" + userId + "/application/" + appId;
+        return "redirect:/user/" + userId + "/application/" + appId;
     }
 
-    @PostMapping("{userId}/application/{appId}/command/{cmdId}/delete")
+    @PostMapping("user/{userId}/application/{appId}/command/{cmdId}/delete")
     public String deleteCommand(@PathVariable String userId, @PathVariable String appId, @PathVariable String cmdId) {
         commandService.delete(commandService.findById(cmdId));
-        return "redirect:/" + userId + "/application/" + appId;
+        return "redirect:/user/" + userId + "/application/" + appId;
     }
 
 

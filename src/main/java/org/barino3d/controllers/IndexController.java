@@ -37,7 +37,7 @@ public class IndexController {
         }
         List<Command> commands = application.getCommands();
         model.addAttribute("commands", commands);
-        return "redirect:/" + userId + "/application/" + application.getId();
+        return "redirect:/user/" + userId + "/application/" + application.getId();
     }
 
     @GetMapping("/login")
