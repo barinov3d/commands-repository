@@ -1,22 +1,70 @@
-#page-container {
+a {
+    vertical-align: middle
+}
+
+input {
+    width: 100%;
+    margin-right: 5px;
+}
+
+body {
+    position: relative;
+    min-height: 100vh;
+}
+
+.content-wrap {
     padding-bottom: 2.5rem;
 }
 
-.container {
-    width: 90%;
-    margin: 0 auto;
+
+h1 {
+    font-size: 120%;
+}
+
+.gray {
+    color: #919191;
 }
 
 .page {
     display: flex;
     flex-direction: column;
     margin: 0;
-    font-family: "Verdana", "Tahoma", sans-serif;
-    font-size: 14px;
+    font-family: "Mukta Malar", Arial;
+    font-size: 1em;
     min-height: 100vh;
     position: relative;
 }
 
+.page-header {
+    background-color: #0f0f0f;
+    display: flex;
+    justify-content: space-between;
+}
+
+.page-title, .author {
+    padding-left: 20px;
+}
+
+.sign-in-title, .year, .app-header {
+    padding-right: 20px;
+}
+
+.page-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+
+    background-color: #0f0f0f;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 80%;
+}
+
+.app-header {
+    border-bottom: 1px solid gray;
+}
 
 button {
     box-shadow: inset 0px 1px 0px 0px #ffffff;
@@ -67,15 +115,14 @@ button.red {
     text-shadow: 0px 1px 0px #810e05;
 }
 
+
 button.red:hover {
     background: linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
     background-color: #c62d1f;
 }
 
-
 li {
     list-style: none;
-    font-size: 12px;
 }
 
 a {
@@ -96,76 +143,21 @@ a {
     font-weight: bold;
 }
 
-
-.page-header {
-    color: #dedede;
-    background-color: #0f0f0f;
-}
-
-.page-header .container {
-    display: flex;
-    justify-content: space-between;
-}
-
-.app-header {
-    border-bottom: 1px solid gray;
-}
-
 .row {
     display: flex;
+    flex-direction: row;
+    height: 100%;
 }
 
 .column-left {
     padding-right: 10px;
     flex: 20%;
     border-right: 1px solid gray;
-    font-size: 12px;
-    min-height: 100vh;
 }
 
 .column-right {
     flex: 100%;
     padding: 20px;
-    min-height: 100vh;
-}
-
-.page-title {
-    margin: 0;
-    margin-bottom: 4px;
-    padding: 0;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 48px;
-}
-
-.sign-in-title {
-    margin: 0;
-    margin-bottom: 4px;
-    padding: 0;
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 48px;
-}
-
-.page-footer {
-    color: #ffffff;
-    background-color: #333333;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 12px;
-    padding-bottom: 14px;
-    margin-top: 12px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
-
-.page-footer p {
-    color: #888888;
-    padding-left: 30px;
-    padding-right: 30px;
 }
 
 .icon {
@@ -187,4 +179,5 @@ a {
 .buttons {
     display: flex;
     justify-content: space-between;
+
 }

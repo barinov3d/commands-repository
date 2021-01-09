@@ -5,43 +5,37 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Commands repository - online notes with commands & hotkeys</title>
     <link href="/css/style.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 </head>
 <body class="page">
-<div id="page-container">
-    <header class="page-header">
-        <div class="container">
+<div class="content-wrap">
+    <header class="page-header gray row">
+        <div>
             <h1 class="page-title">Commands repository</h1>
-            <table>
-                <tr>
-                    <th>
-                        <img alt="login img" src="/img/login_gray_136_136_136.svg" width="22px">
-                    </th>
-                    <th><h2 class="sign-in-title">Signed in as <b th:text="${user.email}">email</b></h2></th>
-                    <th>
-                        <a th:href="@{/logout}" type="submit">
-                            <span class="icon icon-logout" type="button"></span>
-                        </a>
-                    </th>
-                </tr>
-            </table>
+        </div>
+        <div class="row">
+            <p><img alt="login-img" class="icon" src="/img/login_gray_136_136_136.svg" style="padding-right: 5px"></p>
+            <p class="sign-in-title">Signed in as <b th:text="${user.email}">email</b></p>
+            <p><a style="padding-right: 10px" th:href="@{/logout}" type="submit">
+                <span class="icon icon-logout" type="button"></span>
+            </a></p>
         </div>
     </header>
     <main>
         <div class="app-header">
-            <div align="right" class="container">
+            <div align="right">
                 <table>
                     <tr>
-                        <th><h1 class="page-title" id="button" th:object="${currentApplication}"
-                                th:text="${currentApplication.name}">App name</h1></th>
+                        <th><p class="page-title" id="button" th:object="${currentApplication}"
+                               th:text="${currentApplication.name}">App name</p></th>
                         <th>
                             <form method="POST" th:action="@{{id}/delete(id=${currentApplication.id})}">
-                                <button style="background-color: lightcoral; font-weight: bold"
+                                <button class="red" style="font-weight: bold"
                                         title="delete application and all it's commands">x
                                 </button>
                             </form>
                         </th>
                     </tr>
-
                 </table>
             </div>
         </div>
@@ -55,30 +49,24 @@
                     </ul>
                     <ul>
                         <li>
-                            <form method="POST" th:action="@{/{userId}/application(userId=${user.id})}">
-                                <table>
-                                    <tr>
-                                        <th><label>
-                                            <input placeholder="enter new app name.." th:field="*{newApp.name}"/>
-                                        </label></th>
-                                        <th>
-                                            <button class="green" href="#"
-                                                    style="background-color: lightgreen; font-weight: bold"
-                                                    title="add new application"
-                                                    type="submit">+
-                                            </button>
-                                        </th>
-                                    </tr>
+                            <form class="row" method="POST"
+                                  th:action="@{/{userId}/application(userId=${user.id})}">
+                                <input placeholder="enter new app name.." th:field="*{newApp.name}"/>
+                                <button class="green" href="#"
+                                        style="font-weight: bold"
+                                        title="add new application"
+                                        type="submit">+
+                                </button>
+                                </tr>
                                 </table>
                             </form>
                         </li>
                     </ul>
-
-
                 </div>
                 <div class="column-right">
-                    <div class="command">
-                        <form method="POST" th:action="@{{appId}/command(appId=${currentApplication.id})}">
+                    <div>
+                        <form class="row" method="POST"
+                              th:action="@{{appId}/command(appId=${currentApplication.id})}">
                             <input placeholder="enter command description.." th:field="*{newCommand.description}">
                             <input placeholder="enter command text.." th:field="*{newCommand.text}">
                             <button class="green" style=" font-weight: bold"
@@ -87,7 +75,7 @@
                         </form>
                     </div>
                     <div class="command" th:each="command : ${commands}">
-                        <p style="font-size: 12px" th:text="${command.description}">command description</p>
+                        <p th:text="${command.description}">command description</p>
                         <div class="buttons">
                             <button class="green" href="#" onclick="copyToClipboard(this.closest('.command'))"
                                     style="background-color: lightgreen; font-weight: bold">copy to clipboard
@@ -110,9 +98,9 @@
         </section>
     </main>
 </div>
-<footer class="page-footer">
-    <p>Dmitry Barinov</p>
-    <p>2021</p>
+<footer class="page-footer gray">
+    <div class="author"><p>Dmitry Barinov</p></div>
+    <div class="year"><p>2021</p></div>
 </footer>
 <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
 <script src="/js/script.js" type="text/javascript"></script>
