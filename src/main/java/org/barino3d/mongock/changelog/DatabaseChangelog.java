@@ -8,7 +8,6 @@ import org.barino3d.models.Command;
 import org.barino3d.models.User;
 import org.barino3d.repositories.ApplicationRepository;
 import org.barino3d.repositories.CommandRepository;
-import org.barino3d.repositories.UserRepository;
 import org.barino3d.services.UserService;
 
 import java.util.Arrays;

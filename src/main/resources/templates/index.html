@@ -19,7 +19,7 @@
                     <th><h2 class="sign-in-title">Signed in as <b th:text="${user.email}">email</b></h2></th>
                     <th>
                         <a th:href="@{/logout}" type="submit">
-                            <span type="button" class="icon icon-logout"></span>
+                            <span class="icon icon-logout" type="button"></span>
                         </a>
                     </th>
                 </tr>
@@ -62,7 +62,8 @@
                                             <input placeholder="enter new app name.." th:field="*{newApp.name}"/>
                                         </label></th>
                                         <th>
-                                            <button class="green" href="#" style="background-color: lightgreen; font-weight: bold"
+                                            <button class="green" href="#"
+                                                    style="background-color: lightgreen; font-weight: bold"
                                                     title="add new application"
                                                     type="submit">+
                                             </button>
