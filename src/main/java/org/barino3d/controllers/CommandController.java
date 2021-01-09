@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
+
 @Controller
 @AllArgsConstructor(onConstructor = @____(@Autowired))
 public class CommandController {
@@ -24,7 +26,8 @@ public class CommandController {
         newCommand.setDescription(command.getDescription());
         newCommand.setText(command.getText());
         final Application application = applicationService.findById(appId);
-        application.getCommands().add(commandService.save(newCommand));
+        newCommand.setApplication(application);
+        application.addCommand(commandService.save(newCommand));
         applicationService.save(application);
         return "redirect:/user/" + userId + "/application/" + appId;
     }
@@ -32,6 +35,12 @@ public class CommandController {
     @PostMapping("user/{userId}/application/{appId}/command/{cmdId}/delete")
     public String deleteCommand(@PathVariable String userId, @PathVariable String appId, @PathVariable String cmdId) {
         commandService.delete(commandService.findById(cmdId));
+        Application app = applicationService.findById(appId);
+        //TODO dirty workaround. NULL element
+        if ((app.getCommands().size() == 1) && app.getCommands().get(0) == null) {
+            app.setCommands(new ArrayList<>());
+            applicationService.save(app);
+        }
         return "redirect:/user/" + userId + "/application/" + appId;
     }
 

@@ -57,8 +57,6 @@
                                         title="add new application"
                                         type="submit">+
                                 </button>
-                                </tr>
-                                </table>
                             </form>
                         </li>
                     </ul>
@@ -75,7 +73,7 @@
                         </form>
                     </div>
                     <div class="command" th:each="command : ${commands}">
-                        <p th:text="${command.description}">command description</p>
+                        <p th:text="${command == null ? '' : command.description}">command description</p>
                         <div class="buttons">
                             <button class="green" href="#" onclick="copyToClipboard(this.closest('.command'))"
                                     style="background-color: lightgreen; font-weight: bold">copy to clipboard
@@ -89,7 +87,8 @@
                         </div>
                         <a type="button">
                             <div class="command-code">
-                                <code style="font-family:monospace;" th:text="${command.text}">command text</code>
+                                <code style="font-family:monospace;" th:text="${command == null ? '' : command.text}">command
+                                    text</code>
                             </div>
                         </a>
                     </div>

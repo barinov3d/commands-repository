@@ -46,7 +46,7 @@ public class ApplicationController {
     }
 
     @PostMapping("user/{userId}/application/{id}/delete")
-    public String deleteCommand(@PathVariable String userId, @PathVariable String id) {
+    public String deleteApplication(@PathVariable String userId, @PathVariable String id) {
         if (applicationService.findAllByUser(userService.findById(userId)).size() == 1) {
             return "redirect:/";
         }
