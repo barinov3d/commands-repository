@@ -15,10 +15,12 @@ import java.util.Arrays;
 @ChangeLog
 public class DatabaseChangelog {
 
+/*
     @ChangeSet(order = "001", id = "dropDb", author = "dmitry", runAlways = true)
     public void dropDb(MongoDatabase db) {
         db.drop();
     }
+*/
 
     @ChangeSet(order = "002", id = "insertData", author = "dmitry")
     public void insertData(ApplicationRepository applicationRepository, CommandRepository commandRepository, UserService userService) {

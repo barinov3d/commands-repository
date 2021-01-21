@@ -3,3 +3,7 @@ mongock:
   runner-type: "InitializingBean"
   change-logs-scan-package:
     - org.barino3d.mongock.changelog
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://test:testDB@apps.16whc.mongodb.net/commands-repository?retryWrites=true&w=majority
