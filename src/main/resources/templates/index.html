@@ -5,11 +5,11 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Commands repository - online notes with commands & hotkeys</title>
     <link href="/css/style.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+    <!--<link href="style.css" rel="stylesheet">-->
 </head>
 <body class="page">
 <div class="content-wrap">
-    <header class="page-header gray row">
+    <header class="page-header row">
         <div>
             <h1 class="page-title">Commands repository</h1>
         </div>
@@ -23,15 +23,15 @@
     </header>
     <main>
         <div class="app-header">
-            <div align="right">
+            <div align="center">
                 <table>
                     <tr>
-                        <th><p class="page-title" id="button" th:object="${currentApplication}"
-                               th:text="${currentApplication.name}">App name</p></th>
+                        <th><h1 class="page-title" id="button" th:object="${currentApplication}"
+                                th:text="${currentApplication.name}">App name</h1></th>
                         <th>
                             <form method="POST" th:action="@{{id}/delete(id=${currentApplication.id})}">
                                 <button class="red" style="font-weight: bold"
-                                        title="delete application and all it's commands">x
+                                        title="delete application and all it's commands">delete
                                 </button>
                             </form>
                         </th>
@@ -51,10 +51,10 @@
                         <li>
                             <form class="row" method="POST"
                                   th:action="@{/user/{userId}/application(userId=${user.id})}">
-                                <input placeholder="enter new app name.." th:field="*{newApp.name}"/>
+                                <input placeholder="app name" th:field="*{newApp.name}"/>
                                 <button class="green" href="#"
                                         style="font-weight: bold"
-                                        title="add new application"
+                                        title="enter new app name.."
                                         type="submit">+
                                 </button>
                             </form>
@@ -65,15 +65,15 @@
                     <div>
                         <form class="row" method="POST"
                               th:action="@{{appId}/command(appId=${currentApplication.id})}">
-                            <input placeholder="enter command description.." th:field="*{newCommand.description}">
-                            <input placeholder="enter command text.." th:field="*{newCommand.text}">
-                            <button class="green" style=" font-weight: bold"
+                            <textarea class="boxsizingBorder" placeholder="command itself" th:field="*{newCommand.text}"></textarea>
+                            <textarea class="boxsizingBorder" placeholder="command description" th:field="*{newCommand.description}"></textarea>
+                            <button class="green_strong" style=" font-weight: bold"
                                     title="add new command">+
                             </button>
                         </form>
                     </div>
                     <div class="command" th:each="command : ${commands}">
-                        <p th:text="${command == null ? '' : command.description}">command description</p>
+                        <h1 th:text="${command == null ? '' : command.description}">command description</h1>
                         <div class="buttons">
                             <button class="green" href="#" onclick="copyToClipboard(this.closest('.command'))"
                                     style="background-color: lightgreen; font-weight: bold">copy to clipboard
@@ -87,8 +87,8 @@
                         </div>
                         <a type="button">
                             <div class="command-code">
-                                <code style="font-family:monospace;" th:text="${command == null ? '' : command.text}">command
-                                    text</code>
+                                <pre><code style="font-family:monospace;"
+                                           th:text="${command == null ? '' : command.text}">command text</code></pre>
                             </div>
                         </a>
                     </div>
@@ -97,7 +97,7 @@
         </section>
     </main>
 </div>
-<footer class="page-footer gray">
+<footer class="page-footer">
     <div class="author"><p>Dmitry Barinov</p></div>
     <div class="year"><p>2021</p></div>
 </footer>

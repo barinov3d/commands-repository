@@ -2,6 +2,13 @@ a {
     vertical-align: middle
 }
 
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    resize: none;
+    height: 70px;
+}
+
 input {
     width: 100%;
     margin-right: 5px;
@@ -21,24 +28,20 @@ h1 {
     font-size: 120%;
 }
 
-.gray {
-    color: #919191;
-}
-
 .page {
     display: flex;
     flex-direction: column;
     margin: 0;
-    font-family: "Mukta Malar", Arial;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 1em;
     min-height: 100vh;
     position: relative;
 }
 
 .page-header {
-    background-color: #0f0f0f;
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px solid gray;
 }
 
 .page-title, .author {
@@ -54,7 +57,7 @@ h1 {
     bottom: 0;
     width: 100%;
     height: 2.5rem;
-
+    color: white;
     background-color: #0f0f0f;
     display: flex;
     justify-content: space-between;
@@ -64,6 +67,8 @@ h1 {
 
 .app-header {
     border-bottom: 1px solid gray;
+    background: #0f0f0f;
+    color: white;
 }
 
 button {
@@ -84,7 +89,6 @@ button {
 button:hover {
     background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
     background-color: #f6f6f6;
-
 }
 
 button:active {
@@ -93,31 +97,32 @@ button:active {
 }
 
 button.green {
-    box-shadow: inset 0px 1px 0px 0px #a4e271;
-    background: linear-gradient(to bottom, #89c403 5%, #77a809 100%);
-    background-color: #89c403;
-    border: 1px solid #74b807;
-    color: #ffffff;
-    text-shadow: 0px 1px 0px #528009;
+    border: 2px solid #74b807;
+    color: #000000;
+    height: 25px;
+    border-radius: 0px;
+}
+
+button.green_strong {
+    border: 4px solid #74b807;
+    color: #000000;
+    height: 36px;
+    border-radius: 0px;
 }
 
 button.green:hover {
-    background: linear-gradient(to bottom, #77a809 5%, #89c403 100%);
     background-color: #77a809;
 }
 
 button.red {
-    box-shadow: inset 0px 1px 0px 0px #f5978e;
-    background: linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
-    background-color: #f24537;
-    border: 1px solid #d02718;
-    color: #ffffff;
-    text-shadow: 0px 1px 0px #810e05;
+    border: 2px solid #d02718;
+    color: #000000;
+    height: 25px;
+    border-radius: 0px;
 }
 
 
 button.red:hover {
-    background: linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
     background-color: #c62d1f;
 }
 
@@ -156,7 +161,7 @@ a {
 }
 
 .column-right {
-    flex: 100%;
+    flex: 80%;
     padding: 20px;
 }
 
