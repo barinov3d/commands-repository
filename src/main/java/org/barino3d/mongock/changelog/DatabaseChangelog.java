@@ -4,9 +4,10 @@ import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
 import org.barino3d.models.Application;
 import org.barino3d.models.Command;
-import org.barino3d.models.User;
+import org.barino3d.models.UserDto;
 import org.barino3d.repositories.ApplicationRepository;
 import org.barino3d.repositories.CommandRepository;
+import org.barino3d.repositories.UserRepository;
 import org.barino3d.services.UserService;
 
 import java.util.Arrays;
@@ -22,9 +23,9 @@ public class DatabaseChangelog {
 */
 
     @ChangeSet(order = "002", id = "insertData", author = "dmitry")
-    public void insertData(ApplicationRepository applicationRepository, CommandRepository commandRepository, UserService userService) {
-        User user1 = userService.createUser(new User("test1@gmail.com", "123456"));
-        User user2 = userService.createUser(new User("test2@gmail.com", "123456"));
+    public void insertData(ApplicationRepository applicationRepository, CommandRepository commandRepository, UserService userService, UserRepository userRepository) {
+        UserDto user1 = userService.createUser(new UserDto("test1@gmail.com", "test1gmail"));
+        UserDto user2 = userService.createUser(new UserDto("test2@gmail.com", "test2gmail"));
         final Application application1 = new Application("IntelliJ IDEA");
         final Application application2 = new Application("Docker");
 

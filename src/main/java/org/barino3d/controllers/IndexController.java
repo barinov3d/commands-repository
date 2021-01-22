@@ -3,7 +3,7 @@ package org.barino3d.controllers;
 import lombok.AllArgsConstructor;
 import org.barino3d.models.Application;
 import org.barino3d.models.Command;
-import org.barino3d.models.User;
+import org.barino3d.models.UserDto;
 import org.barino3d.services.ApplicationService;
 import org.barino3d.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findByEmail(authentication.getName());
+        UserDto user = userService.findByEmail(authentication.getName());
         final String userId = user.getId();
         List<Application> applications = applicationService.findAllByUser(userService.findById(userId));
         Application application;

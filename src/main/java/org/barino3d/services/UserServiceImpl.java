@@ -3,17 +3,20 @@ package org.barino3d.services;
 import lombok.AllArgsConstructor;
 import org.barino3d.exceptions.DuplicateEmailException;
 import org.barino3d.exceptions.UserNotFoundException;
-import org.barino3d.models.User;
+import org.barino3d.models.UserDto;
+import org.barino3d.models.UserEntity;
 import org.barino3d.repositories.UserRepository;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @AllArgsConstructor(onConstructor = @____(@Autowired))
@@ -24,54 +27,66 @@ public class UserServiceImpl implements UserService {
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
-    }
-
-    @Override
-    public User findById(String id) throws UserNotFoundException {
-        return userRepository.findById(id)
+    public UserDto findById(String id) throws UserNotFoundException {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        final UserEntity userEntity = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(String.format("User with id: %s not found", id)));
+        return modelMapper.map(userEntity, UserDto.class);
     }
 
     @Override
     public void deleteById(String id) throws UserNotFoundException {
-        final User user = userRepository.findById(id)
+        final UserEntity user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(String.format("User with id: %s not found", id)));
         userRepository.deleteById(id);
     }
 
     @Override
-    public void delete(User user) throws UserNotFoundException {
-        userRepository.delete(user);
+    public void delete(UserDto user) throws UserNotFoundException {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        UserEntity userEntity = modelMapper.map(user, UserEntity.class);
+        userRepository.delete(userEntity);
+    }
+
+    @Override
+    public UserDto save(UserDto user) {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        final UserEntity userEntity = userRepository.save(modelMapper.map(user, UserEntity.class));
+        return modelMapper.map(userEntity, UserDto.class);
+    }
+
+    @Override
+    public UserDto findByEmail(String email) {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        return modelMapper.map(userRepository.findByEmail(email), UserDto.class);
     }
 
 
     @Override
-    public User save(User user) throws DuplicateEmailException {
-        if (user.getId() == null && (userRepository.findByEmail(user.getEmail()) != null)) {
+    public UserDto createUser(UserDto userDto) {
+        if (userDto.getId() == null && (userRepository.findByEmail(userDto.getEmail()) != null)) {
             throw new DuplicateEmailException(
-                    "User with name '" + user.getEmail() + "' is already define in the scope");
+                    "User with name '" + userDto.getEmail() + "' is already define in the scope");
         }
-        return userRepository.save(user);
-    }
+        userDto.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
 
-    @Override
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
+        UserEntity userEntity = modelMapper.map(userDto, UserEntity.class);
+        userRepository.save(userEntity);
 
-    @Override
-    public User createUser(User user) {
-        user.setEncryptedPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        return modelMapper.map(userEntity, UserDto.class);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User userModel = userRepository.findByEmail(username);
+        UserEntity userModel = userRepository.findByEmail(username);
         if (userModel == null) throw new UsernameNotFoundException(username);
-        return new org.springframework.security.core.userdetails.User(userModel.getEmail(), userModel.getEncryptedPassword(), true, true, true, true, new ArrayList<>());
+        return new User(userModel.getEmail(), userModel.getEncryptedPassword(), true, true, true, true, new ArrayList<>());
     }
 }

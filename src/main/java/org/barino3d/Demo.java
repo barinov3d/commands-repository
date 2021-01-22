@@ -1,6 +1,7 @@
 package org.barino3d;
 
 
+import com.github.cloudyrock.spring.v5.EnableMongock;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration;
@@ -12,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication(exclude = EmbeddedMongoAutoConfiguration.class)
 @EnableMongoRepositories(basePackages = "org.barino3d.repositories")
-//@EnableMongock
+@EnableMongock
 @EnableWebMvc
 public class Demo {
     public static void main(String[] args) {

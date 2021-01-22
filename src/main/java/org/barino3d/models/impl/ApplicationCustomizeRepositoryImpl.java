@@ -1,7 +1,7 @@
 package org.barino3d.models.impl;
 
 import org.barino3d.models.Application;
-import org.barino3d.models.User;
+import org.barino3d.models.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -23,7 +23,7 @@ public class ApplicationCustomizeRepositoryImpl<T, ID> implements ApplicationCus
     }
 
     @Override
-    public List<Application> findAllByUser(User user) {
+    public List<Application> findAllByUser(UserDto user) {
         Query query = new Query();
         query.addCriteria(Criteria.where("user.id").is(user.getId()));
         return mongoTemplate.find(query, Application.class);

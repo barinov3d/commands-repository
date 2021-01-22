@@ -3,7 +3,7 @@ package org.barino3d.controllers;
 import lombok.AllArgsConstructor;
 import org.barino3d.models.Application;
 import org.barino3d.models.Command;
-import org.barino3d.models.User;
+import org.barino3d.models.UserDto;
 import org.barino3d.services.ApplicationService;
 import org.barino3d.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class ApplicationController {
 
     @GetMapping("user/{userId}/application/{id}")
     public String getApplication(@PathVariable String userId, @PathVariable String id, Model model) {
-        User user = userService.findById(userId);
+        UserDto user = userService.findById(userId);
         List<Application> applications = applicationService.findAllByUser(user);
         final Application currentApplication = applicationService.findById(id);
         List<Command> commands = currentApplication.getCommands();

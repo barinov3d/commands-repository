@@ -65,8 +65,10 @@
                     <div>
                         <form class="row" method="POST"
                               th:action="@{{appId}/command(appId=${currentApplication.id})}">
-                            <textarea class="boxsizingBorder" placeholder="command itself" th:field="*{newCommand.text}"></textarea>
-                            <textarea class="boxsizingBorder" placeholder="command description" th:field="*{newCommand.description}"></textarea>
+                            <textarea class="boxsizingBorder" placeholder="command itself"
+                                      th:field="*{newCommand.text}"></textarea>
+                            <textarea class="boxsizingBorder" placeholder="command description"
+                                      th:field="*{newCommand.description}"></textarea>
                             <button class="green_strong" style=" font-weight: bold"
                                     title="add new command">+
                             </button>

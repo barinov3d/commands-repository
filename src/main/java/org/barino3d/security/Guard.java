@@ -1,6 +1,6 @@
 package org.barino3d.security;
 
-import org.barino3d.models.User;
+import org.barino3d.models.UserEntity;
 import org.barino3d.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -14,7 +14,7 @@ public class Guard {
     public boolean checkUserId(Authentication authentication, String id) {
         String email = authentication.getName();
         System.out.println(email + " at " + id);
-        User result = repo.findByEmail(email);
+        UserEntity result = repo.findByEmail(email);
         return result != null && result.getId().equals(id);
     }
 }

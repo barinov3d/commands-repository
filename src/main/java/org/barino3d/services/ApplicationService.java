@@ -3,7 +3,7 @@ package org.barino3d.services;
 import org.barino3d.exceptions.ApplicationNotFoundException;
 import org.barino3d.exceptions.DuplicateApplicationNameException;
 import org.barino3d.models.Application;
-import org.barino3d.models.User;
+import org.barino3d.models.UserDto;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface ApplicationService {
 
     List<Application> findAll();
 
-    List<Application> findAllByUser(User user);
+    List<Application> findAllByUser(UserDto user);
 
     Application findById(String id) throws ApplicationNotFoundException;
 
