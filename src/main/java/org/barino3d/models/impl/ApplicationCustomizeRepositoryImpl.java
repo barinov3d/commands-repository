@@ -23,6 +23,14 @@ public class ApplicationCustomizeRepositoryImpl<T, ID> implements ApplicationCus
     }
 
     @Override
+    public Application findByNameAndUserId(String name, String userId) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("name").is(name));
+        query.addCriteria(Criteria.where("userId").is(userId));
+        return mongoTemplate.findOne(query, Application.class);
+    }
+
+    @Override
     public List<Application> findAllByUser(UserEntity user) {
         Query query = new Query();
         query.addCriteria(Criteria.where("user.id").is(user.getId()));

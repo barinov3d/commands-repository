@@ -57,7 +57,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     public Application save(Application application) throws DuplicateApplicationNameException {
-        if (application.getId() == null && (applicationRepository.findByName(application.getName()) != null)) {
+        if (application.getId() == null && (applicationRepository.findByNameAndUserId(application.getName(), application.getUser().getId()) != null)) {
             throw new DuplicateApplicationNameException(
                     "Application with name '" + application.getName() + "' is already define in the scope");
         }

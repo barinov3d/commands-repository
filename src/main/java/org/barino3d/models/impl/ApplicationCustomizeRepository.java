@@ -10,6 +10,8 @@ public interface ApplicationCustomizeRepository<T, ID> {
 
     Application findByName(String name);
 
+    Application findByNameAndUserId(String name, String userId);
+
     List<Application> findAllByUser(UserEntity user);
 
 }
