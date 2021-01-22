@@ -2,7 +2,6 @@ package org.barino3d.mongock.changelog;
 
 import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
-import com.mongodb.client.MongoDatabase;
 import org.barino3d.models.Application;
 import org.barino3d.models.Command;
 import org.barino3d.models.User;
