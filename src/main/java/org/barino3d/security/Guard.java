@@ -13,7 +13,6 @@ public class Guard {
 
     public boolean checkUserId(Authentication authentication, String id) {
         String email = authentication.getName();
-        System.out.println(email + " at " + id);
         UserEntity result = repo.findByEmail(email);
         return result != null && result.getId().equals(id);
     }

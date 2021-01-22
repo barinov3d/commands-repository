@@ -27,12 +27,10 @@ public class UserServiceImpl implements UserService {
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public UserDto findById(String id) throws UserNotFoundException {
-        ModelMapper modelMapper = new ModelMapper();
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+    public UserEntity findById(String id) throws UserNotFoundException {
         final UserEntity userEntity = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(String.format("User with id: %s not found", id)));
-        return modelMapper.map(userEntity, UserDto.class);
+        return userEntity;
     }
 
     @Override

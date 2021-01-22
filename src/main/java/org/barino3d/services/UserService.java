@@ -5,11 +5,9 @@ import org.barino3d.models.UserDto;
 import org.barino3d.models.UserEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import java.util.List;
-
 public interface UserService extends UserDetailsService {
 
-    UserDto findById(String id) throws UserNotFoundException;
+    UserEntity findById(String id) throws UserNotFoundException;
 
     void deleteById(String id) throws UserNotFoundException;
 

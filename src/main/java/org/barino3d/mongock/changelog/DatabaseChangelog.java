@@ -69,13 +69,13 @@ public class DatabaseChangelog {
         commandRepository.save(command8);
 
         application1.addCommands(Arrays.asList(command1, command2));
-        application1.setUser(user1);
+        application1.setUser(userService.findById(user1.getId()));
         application2.addCommands(Arrays.asList(command3, command4));
-        application2.setUser(user1);
+        application2.setUser(userService.findById(user1.getId()));
         application3.addCommands(Arrays.asList(command5, command6));
-        application3.setUser(user2);
+        application3.setUser(userService.findById(user2.getId()));
         application4.addCommands(Arrays.asList(command7, command8));
-        application4.setUser(user2);
+        application4.setUser(userService.findById(user2.getId()));
 
         applicationRepository.save(application1);
         applicationRepository.save(application2);

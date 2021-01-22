@@ -6,8 +6,10 @@ import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +23,13 @@ public class UserEntity {
     List<Application> applications = new ArrayList<>();
     @Id
     private String id;
-    @Column(nullable = false, length = 120, unique = true)
+
+    @NotNull(message = "User's email must not be null")
+    @Size(min = 7, max = 120)
+    @Field(name = "email")
     private String email;
-    @Column(nullable = false, unique = true)
+    @NotNull()
+    @Field(name = "encryptedPassword")
     private String encryptedPassword;
 
     public UserEntity(String email, String encryptedPassword) {
