@@ -1,0 +1,40 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Register</title>
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/input.css" rel="stylesheet">
+</head>
+<body class="page">
+<div id="page-container">
+    <header class="page-header">
+        <div class="container">
+            <h1 class="page-title">Commands repository</h1>
+        </div>
+    </header>
+    <div class="column-center">
+        <form action="#" method="post" th:action="@{/register}" th:object="${userDto}">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <h1>Register as a new user</h1>
+            <p>
+                <label for="email">Email</label>
+                <input class="form-field" id="email" name="emailId" placeholder="Email" th:field="*{email}"
+                       type="text"/>
+            </p>
+            <p>
+                <label for="password">Password</label>
+                <input class="form-field" id="password" name="password" placeholder="Password" th:field="*{password}"
+                       type="password"/>
+            </p>
+            <button class="green" type="submit">Sign up</button>
+        </form>
+    </div>
+</div>
+<footer class="page-footer">
+    <p>Dmitry Barinov</p>
+    <p>2021</p>
+</footer>
+</body>
+</html>

@@ -14,6 +14,6 @@ public class Guard {
     public boolean checkUserId(Authentication authentication, String id) {
         String email = authentication.getName();
         UserEntity result = repo.findByEmail(email);
-        return result != null && result.getId().equals(id);
+        return result != null && result.getId().equals(id) && result.isEnabled();
     }
 }

@@ -1,7 +1,8 @@
-package org.barino3d.models.impl;
+package org.barino3d.repositories.impl;
 
 import org.barino3d.models.Application;
 import org.barino3d.models.UserEntity;
+import org.barino3d.repositories.ApplicationCustomizeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;

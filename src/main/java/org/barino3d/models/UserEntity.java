@@ -31,6 +31,11 @@ public class UserEntity {
     @NotNull()
     @Field(name = "encryptedPassword")
     private String encryptedPassword;
+    @DBRef
+    @Field(name = "confirmationToken")
+    private ConfirmationToken confirmationToken;
+    @Field(name = "isEnabled")
+    private boolean isEnabled;
 
     public UserEntity(String email, String encryptedPassword) {
         this.email = email;

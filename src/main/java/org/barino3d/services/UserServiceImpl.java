@@ -3,6 +3,7 @@ package org.barino3d.services;
 import lombok.AllArgsConstructor;
 import org.barino3d.exceptions.DuplicateEmailException;
 import org.barino3d.exceptions.UserNotFoundException;
+import org.barino3d.models.ConfirmationToken;
 import org.barino3d.models.UserDto;
 import org.barino3d.models.UserEntity;
 import org.barino3d.repositories.UserRepository;
@@ -79,6 +80,19 @@ public class UserServiceImpl implements UserService {
         userRepository.save(userEntity);
 
         return modelMapper.map(userEntity, UserDto.class);
+    }
+
+    @Override
+    public boolean verify(ConfirmationToken confirmationToken) {
+        UserEntity user = userRepository.findByEmailIgnoreCase(confirmationToken.getUserEntity().getEmail());
+        if (user == null || user.isEnabled()) {
+            return false;
+        } else {
+            user.setConfirmationToken(null);
+            user.setEnabled(true);
+            userRepository.save(user);
+            return true;
+        }
     }
 
     @Override

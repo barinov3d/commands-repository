@@ -1,6 +1,7 @@
 package org.barino3d.services;
 
 import org.barino3d.exceptions.CommandNotFoundException;
+import org.barino3d.models.Application;
 import org.barino3d.models.Command;
 import org.barino3d.repositories.CommandRepository;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,11 @@ public class CommandServiceImpl implements CommandService {
     @Override
     public Command save(Command command) {
         return commandRepository.save(command);
+    }
+
+    @Override
+    public void deleteAllByApplication(Application application) {
+        commandRepository.deleteAllByApplication(application);
     }
 
 }

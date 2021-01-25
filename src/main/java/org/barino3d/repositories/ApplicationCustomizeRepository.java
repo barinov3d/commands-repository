@@ -1,4 +1,4 @@
-package org.barino3d.models.impl;
+package org.barino3d.repositories;
 
 
 import org.barino3d.models.Application;

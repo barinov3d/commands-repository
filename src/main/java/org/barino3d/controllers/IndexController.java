@@ -33,7 +33,10 @@ public class IndexController {
         if (applications.size() > 0) {
             application = applications.get(0);
         } else {
-            application = applicationService.save(new Application("Test application"));
+
+            final Application testApplication = new Application("Test application");
+            testApplication.setUser(userService.findById(userId));
+            application = applicationService.save(testApplication);
         }
         List<Command> commands = application.getCommands();
         model.addAttribute("commands", commands);

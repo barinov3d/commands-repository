@@ -5,7 +5,6 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Commands repository - online notes with commands & hotkeys</title>
     <link href="/css/style.css" rel="stylesheet">
-    <!--<link href="style.css" rel="stylesheet">-->
 </head>
 <body class="page">
 <div class="content-wrap">
@@ -74,6 +73,34 @@
                             </button>
                         </form>
                     </div>
+                    <form id="add-from-library" method="post"
+                          th:action="@{{appId}/library(appId=${currentApplication.id})}"
+                          th:if="${#lists.isEmpty(currentApplication.commands)}">
+
+                        <div>
+                            <br>
+                            <label for="applications" style="font-weight: bold">No commands added yet for this
+                                application!</label>
+                            <br>
+                            <label for="applications">You can add it manually using form
+                                above</label>
+                            <br>
+                            <br>
+                            <label for="applications">Or you can try to find your application in our
+                                library and add pre-build command for it:</label>
+                            <br>
+                            <select id="applications" th:field="*{libraryApplication.id}">
+                                <option th:each="libraryApplication : ${libraryApplications}"
+                                        th:text="${libraryApplication.name}"
+                                        th:value="${libraryApplication.id}">
+                                    Application name
+                                </option>
+                            </select>
+                        </div>
+                        <div>
+                            <button class="green_strong" type="submit">add from library</button>
+                        </div>
+                    </form>
                     <div class="command" th:each="command : ${commands}">
                         <h1 th:text="${command == null ? '' : command.description}">command description</h1>
                         <div class="buttons">

@@ -19,7 +19,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests().antMatchers("/login*", "/js/**", "/css/**").permitAll()
+                .authorizeRequests().antMatchers("/login*", "/confirm-account*", "/register*", "/js/**", "/css/**").permitAll()
                 .antMatchers("/user/{id}/**")
                 .access("@guard.checkUserId(authentication,#id)")
                 .and()
