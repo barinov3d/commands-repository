@@ -60,7 +60,7 @@ public class UserAccountController {
             mailMessage.setSubject("Complete Registration!");
             mailMessage.setFrom("commandsrepository@gmail.com");
             mailMessage.setText("To confirm your account, please click here : "
-                    + "http://localhost:8080/confirm-account?token=" + confirmationToken.getConfirmationToken());
+                    + "https://commands-repository.herokuapp.com/confirm-account?token=" + confirmationToken.getConfirmationToken());
             try {
                 emailService.sendEmail(mailMessage);
             } catch (Exception e) {
