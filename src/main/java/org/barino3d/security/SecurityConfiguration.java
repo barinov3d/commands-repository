@@ -20,8 +20,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests().antMatchers("/login*", "/confirm-account*", "/register*", "/js/**", "/css/**").permitAll()
-                .antMatchers("/user/{id}/**")
-                .access("@guard.checkUserId(authentication,#id)")
                 .and()
                 .authorizeRequests().anyRequest().authenticated()
                 .and()

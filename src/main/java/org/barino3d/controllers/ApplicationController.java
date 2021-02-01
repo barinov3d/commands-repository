@@ -8,6 +8,8 @@ import org.barino3d.services.ApplicationService;
 import org.barino3d.services.CommandService;
 import org.barino3d.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,22 +27,30 @@ public class ApplicationController {
     private final CommandService commandService;
     private final UserService userService;
 
-    @PostMapping("user/{userId}/application")
-    public String addApplication(@PathVariable String userId, @ModelAttribute(value = "newApp") Application application) {
+    @PostMapping("application")
+    public String addApplication(@ModelAttribute(value = "newApp") Application application) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userId = userService.findByEmail(authentication.getName()).getId();
         application.setUser(userService.findById(userId));
         applicationService.save(application);
-        return "redirect:/user/" + userId + "/application/" + application.getId();
+        return "redirect:/" + "application/" + application.getId();
     }
 
-    @GetMapping("user/{userId}/application/{id}")
-    public String getApplication(@PathVariable String userId, @PathVariable String id, Model model) {
-        UserEntity user = userService.findById(userId);
+    @GetMapping("application/{id}")
+    public String getApplication(@PathVariable String id, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userId = userService.findByEmail(authentication.getName()).getId();
+        UserEntity currentUser = userService.findById(userId);
+        UserEntity appOwnerUser = applicationService.findById(id).getUser();
+        if (!currentUser.equals(appOwnerUser)) {
+            throw new RuntimeException(String.format("Application with id=%s not owned by the current user", id));
+        }
         UserEntity libraryUser = userService.findById("600eb29748058538a3274fee");
-        List<Application> applications = applicationService.findAllByUser(user);
+        List<Application> applications = applicationService.findAllByUser(currentUser);
         List<Application> libraryApplications = applicationService.findAllByUser(libraryUser);
         final Application currentApplication = applicationService.findById(id);
         List<Command> commands = currentApplication.getCommands();
-        model.addAttribute("user", user);
+        model.addAttribute("currentUser", currentUser);
         model.addAttribute("currentApplication", currentApplication);
         model.addAttribute("applications", applications);
         model.addAttribute("libraryApplications", libraryApplications);
@@ -51,19 +61,26 @@ public class ApplicationController {
         return "index";
     }
 
-    @PostMapping("user/{userId}/application/{id}/delete")
-    public String deleteApplication(@PathVariable String userId, @PathVariable String id) {
+    @PostMapping("application/{id}/delete")
+    public String deleteApplication(@PathVariable String id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userId = userService.findByEmail(authentication.getName()).getId();
+        UserEntity currentUser = userService.findById(userId);
+        UserEntity appOwnerUser = applicationService.findById(id).getUser();
+        if (!currentUser.equals(appOwnerUser)) {
+            throw new RuntimeException(String.format("Application with id=%s not owned by the current user", id));
+        }
         if (applicationService.findAllByUser(userService.findById(userId)).size() == 1) {
             return "redirect:/";
         }
         final Application application = applicationService.findById(id);
         commandService.deleteAllByApplication(application);
         applicationService.delete(application);
-        return "redirect:/user/" + userId + "/application/" + applicationService.findAllByUser(userService.findById(userId)).get(0).getId();
+        return "redirect:/" + "application/" + applicationService.findAllByUser(userService.findById(userId)).get(0).getId();
     }
 
-    @PostMapping("user/{userId}/application/{id}/library")
-    public String getCommandsFromLibraryApplication(@PathVariable String userId, @PathVariable String id, @ModelAttribute(value = "libraryApplication") Application libraryApplication) {
+    @PostMapping("application/{id}/library")
+    public String getCommandsFromLibraryApplication(@PathVariable String id, @ModelAttribute(value = "libraryApplication") Application libraryApplication) {
         final Application userApplication = applicationService.findById(id);
         final Application libraryApplicationFromRepo = applicationService.findById(libraryApplication.getId());
         libraryApplicationFromRepo.getCommands().forEach(
@@ -72,6 +89,6 @@ public class ApplicationController {
                 }
         );
         applicationService.save(userApplication);
-        return "redirect:/user/" + userId + "/application/" + id;
+        return "redirect:/" + "application/" + id;
     }
 }

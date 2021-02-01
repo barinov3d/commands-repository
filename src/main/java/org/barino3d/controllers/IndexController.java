@@ -33,14 +33,13 @@ public class IndexController {
         if (applications.size() > 0) {
             application = applications.get(0);
         } else {
-
             final Application testApplication = new Application("Test application");
             testApplication.setUser(userService.findById(userId));
             application = applicationService.save(testApplication);
         }
         List<Command> commands = application.getCommands();
         model.addAttribute("commands", commands);
-        return "redirect:/user/" + userId + "/application/" + application.getId();
+        return "redirect:/" + "application/" + application.getId();
     }
 
     @GetMapping("/login")
