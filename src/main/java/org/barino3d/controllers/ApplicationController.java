@@ -8,8 +8,6 @@ import org.barino3d.services.ApplicationService;
 import org.barino3d.services.CommandService;
 import org.barino3d.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+
+import static org.barino3d.controllers.ControllersHelper.checkUserIsOwnerOfTheApplication;
+import static org.barino3d.controllers.ControllersHelper.getCurrentUserEmail;
 
 @Controller
 @AllArgsConstructor(onConstructor = @____(@Autowired))
@@ -29,8 +30,7 @@ public class ApplicationController {
 
     @PostMapping("application")
     public String addApplication(@ModelAttribute(value = "newApp") Application application) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userId = userService.findByEmail(authentication.getName()).getId();
+        String userId = userService.findByEmail(getCurrentUserEmail()).getId();
         application.setUser(userService.findById(userId));
         applicationService.save(application);
         return "redirect:/" + "application/" + application.getId();
@@ -38,13 +38,9 @@ public class ApplicationController {
 
     @GetMapping("application/{id}")
     public String getApplication(@PathVariable String id, Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userId = userService.findByEmail(authentication.getName()).getId();
+        String userId = userService.findByEmail(getCurrentUserEmail()).getId();
         UserEntity currentUser = userService.findById(userId);
-        UserEntity appOwnerUser = applicationService.findById(id).getUser();
-        if (!currentUser.equals(appOwnerUser)) {
-            throw new RuntimeException(String.format("Application with id=%s not owned by the current user", id));
-        }
+        checkUserIsOwnerOfTheApplication(currentUser, applicationService.findById(id));
         UserEntity libraryUser = userService.findById("600eb29748058538a3274fee");
         List<Application> applications = applicationService.findAllByUser(currentUser);
         List<Application> libraryApplications = applicationService.findAllByUser(libraryUser);
@@ -63,17 +59,13 @@ public class ApplicationController {
 
     @PostMapping("application/{id}/delete")
     public String deleteApplication(@PathVariable String id) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userId = userService.findByEmail(authentication.getName()).getId();
+        String userId = userService.findByEmail(getCurrentUserEmail()).getId();
         UserEntity currentUser = userService.findById(userId);
-        UserEntity appOwnerUser = applicationService.findById(id).getUser();
-        if (!currentUser.equals(appOwnerUser)) {
-            throw new RuntimeException(String.format("Application with id=%s not owned by the current user", id));
-        }
+        final Application application = applicationService.findById(id);
+        checkUserIsOwnerOfTheApplication(currentUser, application);
         if (applicationService.findAllByUser(userService.findById(userId)).size() == 1) {
             return "redirect:/";
         }
-        final Application application = applicationService.findById(id);
         commandService.deleteAllByApplication(application);
         applicationService.delete(application);
         return "redirect:/" + "application/" + applicationService.findAllByUser(userService.findById(userId)).get(0).getId();
@@ -91,4 +83,5 @@ public class ApplicationController {
         applicationService.save(userApplication);
         return "redirect:/" + "application/" + id;
     }
+
 }
