@@ -14,7 +14,7 @@
         </div>
         <div class="row">
             <p><img alt="login-img" class="icon" src="/img/login_gray_136_136_136.svg" style="padding-right: 5px"></p>
-            <p class="sign-in-title">Signed in as <b th:text="${user.email}">email</b></p>
+            <p class="sign-in-title">Signed in as <b th:text="${currentUser.email}">email</b></p>
             <p><a style="padding-right: 10px" th:href="@{/logout}" type="submit">
                 <span class="icon icon-logout" type="button"></span>
             </a></p>
@@ -49,7 +49,7 @@
                     <ul>
                         <li>
                             <form class="row" method="POST"
-                                  th:action="@{/user/{userId}/application(userId=${user.id})}">
+                                  th:action="@{/application}">
                                 <input placeholder="app name" th:field="*{newApp.name}"/>
                                 <button class="green" href="#"
                                         style="font-weight: bold"
